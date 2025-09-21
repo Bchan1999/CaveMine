@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://bqpqo3aev1bi1"]
+[gd_scene load_steps=24 format=4 uid="uid://bqpqo3aev1bi1"]
 
 [ext_resource type="Script" uid="uid://chyskr0uqev1f" path="res://Scene/test_scene.gd" id="1_huixf"]
 [ext_resource type="Texture2D" uid="uid://cmdfp7p387aqx" path="res://Assets/tile/Untitled_Artwork(5).png" id="3_nk2wp"]
@@ -101,26 +101,20 @@ texture_region_size = Vector2i(305, 307)
 5:5/0 = 0
 6:5/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cy2ab"]
+texture = ExtResource("3_nk2wp")
+margins = Vector2i(65, 50)
+texture_region_size = Vector2i(310, 310)
+4:2/0 = 0
+4:4/0 = 0
+
 [sub_resource type="TileSet" id="TileSet_cy2ab"]
 tile_size = Vector2i(310, 310)
 navigation_layer_0/layers = 1
 custom_data_layer_0/name = "center_coords"
 custom_data_layer_0/type = 5
 sources/0 = SubResource("TileSetAtlasSource_nk2wp")
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pyarj"]
-texture = ExtResource("3_nk2wp")
-margins = Vector2i(65, 50)
-texture_region_size = Vector2i(310, 310)
-4:4/0 = 0
-4:2/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_nk2wp"]
-tile_size = Vector2i(310, 310)
-navigation_layer_0/layers = 1
-custom_data_layer_0/name = "center_coords"
-custom_data_layer_0/type = 5
-sources/1 = SubResource("TileSetAtlasSource_pyarj")
+sources/1 = SubResource("TileSetAtlasSource_cy2ab")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_mtw86"]
 texture = ExtResource("3_yg8v8")
@@ -151,25 +145,23 @@ tile_set = SubResource("TileSet_cy2ab")
 [node name="SelectTile" type="TileMapLayer" parent="."]
 scale = Vector2(0.115, 0.115)
 tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAFAAAAAAADAAAAAAABAAAAAAACAAAAAAACAAAAAAACAAAAAAADAAAAAAACAAAAAAAEAAAAAAACAAAAAAAAAAEAAAABAAEAAAAAAAIAAAABAAEAAAAAAAMAAAABAAEAAAAAAAQAAAABAAEAAAABAAEAAAACAAEAAAACAAEAAAACAAEAAAADAAEAAAACAAEAAAAEAAEAAAACAAEAAAAEAAIAAAACAAEAAAAEAAMAAAACAAEAAAADAAMAAAACAAEAAAACAAMAAAACAAEAAAABAAMAAAACAAEAAAABAAIAAAACAAEAAAACAAIAAAACAAEAAAADAAIAAAACAAEAAAABAAQAAAACAAEAAAACAAQAAAACAAEAAAADAAQAAAACAAEAAAAEAAQAAAACAAEAAAAFAAEAAAADAAEAAAAFAAIAAAADAAEAAAAFAAMAAAADAAEAAAAFAAQAAAADAAEAAAAAAAUAAAABAAIAAAACAAUAAAACAAIAAAABAAUAAAACAAIAAAADAAUAAAACAAIAAAAEAAUAAAACAAIAAAAFAAUAAAADAAIAAAA=")
-tile_set = SubResource("TileSet_nk2wp")
+tile_set = SubResource("TileSet_cy2ab")
 
 [node name="Rock" type="TileMapLayer" parent="."]
 scale = Vector2(0.162, 0.162)
-tile_map_data = PackedByteArray("AAADAAIAAQAAAAAAAQACAAQAAQAAAAAAAQABAAQAAQAAAAAAAQAEAAQAAQAAAAAAAQAEAAUAAQAAAAAAAQAFAAQAAQAAAAAAAQAFAAUAAQAAAAAAAQACAAMAAQAAAAAAAQABAAMAAQAAAAAAAQAFAAMAAQAAAAAAAQACAAIAAQAAAAAAAQABAAIAAQAAAAAAAQAFAAIAAQAAAAAAAQA=")
+tile_map_data = PackedByteArray("AAADAAIAAQAAAAAAAQAAAAUAAQAAAAAAAQADAAQAAQAAAAAAAQABAAUAAQAAAAAAAQACAAQAAQAAAAAAAQABAAQAAQAAAAAAAQADAAUAAQAAAAAAAQAEAAQAAQAAAAAAAQAEAAUAAQAAAAAAAQAFAAQAAQAAAAAAAQAFAAUAAQAAAAAAAQACAAMAAQAAAAAAAQABAAMAAQAAAAAAAQAAAAMAAQAAAAAAAQAAAAQAAQAAAAAAAQADAAMAAQAAAAAAAQAEAAMAAQAAAAAAAQAFAAMAAQAAAAAAAQACAAIAAQAAAAAAAQABAAIAAQAAAAAAAQAAAAIAAQAAAAAAAQAEAAIAAQAAAAAAAQAFAAIAAQAAAAAAAQA=")
 tile_set = SubResource("TileSet_pyarj")
 
 [node name="Player" parent="." instance=ExtResource("4_huixf")]
 position = Vector2(60, 52)
 
-[node name="TileMapController" type="Node2D" parent="." node_paths=PackedStringArray("tilemap", "player")]
+[node name="TileMapController" type="Node2D" parent="." node_paths=PackedStringArray("tilemap", "spawn")]
 script = ExtResource("3_w5jy8")
-tilemap = NodePath("../SelectTile")
-player = NodePath("../Player")
+tilemap = NodePath("../Ground")
+spawn = NodePath("../Spawn")
 
 [node name="Spawn" type="Marker2D" parent="."]
 position = Vector2(89, 195)
 
 [node name="Enemy" parent="." instance=ExtResource("5_xdm7g")]
 position = Vector2(196, 17)
-
-[connection signal="moved_pos" from="Player" to="TileMapController" method="_on_player_moved_pos"]

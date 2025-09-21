@@ -11,6 +11,8 @@ var moving = false
 
 @export var sprite : AnimatedSprite2D
 
+signal moved_pos
+
 var inputs = {"right": Vector2.RIGHT,
 			"left": Vector2.LEFT,
 			"up": Vector2.UP,
@@ -43,6 +45,7 @@ func move(dir):
 	moving = true
 	await tween.finished
 	moving = false
+	moved_pos.emit()
 
 func free_movement():
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():

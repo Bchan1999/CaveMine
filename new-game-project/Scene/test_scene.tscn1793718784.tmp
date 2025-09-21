@@ -171,5 +171,3 @@ position = Vector2(89, 195)
 
 [node name="Enemy" parent="." instance=ExtResource("5_xdm7g")]
 position = Vector2(196, 17)
-
-[connection signal="moved_pos" from="Player" to="TileMapController" method="_on_player_moved_pos"]
